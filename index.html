@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vital Care - Your Financial Advisor</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Grown font will be added here -->
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+    <header class="main-header">
+      <nav class="nav-container">
+        <div class="logo">
+          <h1>Vital Care</h1>
+          <p class="tagline">YOUR FINANCIAL ADVISOR</p>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#policies">Insurance Policies</a></li>
+          <li><a href="#plant-tree">Plant a Tree</a></li>
+          <li><a href="#contact" class="cta-button">Contact Us</a></li>
+        </ul>
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </nav>
+      <div class="quick-quote-bar">
+        <div class="container">
+          <span>Get an instant quote in 30 seconds!</span>
+          <button
+            class="quick-quote-btn"
+            onclick="showLeadPopup('quick_quote')"
+          >
+            <i class="fas fa-bolt"></i> Quick Quote
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="hero" class="hero-section">
+        <div class="hero-content">
+          <h1>Secure Your Future with Vital Care</h1>
+          <p>
+            Expert financial advice and insurance solutions tailored to your
+            needs
+          </p>
+          <a href="#contact" class="cta-button">Get Started</a>
+        </div>
+      </section>
+
+      <section id="about" class="about-section">
+        <div class="container">
+          <h2>About Vital Care</h2>
+          <div class="about-text">
+            <p>
+              At Vital Care, we understand that your financial security is
+              paramount. With years of experience in the insurance industry, we
+              provide expert guidance to protect what matters most to you.
+            </p>
+          </div>
+        </div>
+        <div class="about-features">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="feature-content">
+              <h3>Personalized Insurance Solutions</h3>
+              <p>
+                Tailored insurance plans designed to meet your specific needs
+                and requirements.
+              </p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="feature-content">
+              <h3>Expert Financial Advice</h3>
+              <p>
+                Professional guidance to help you make informed decisions about
+                your financial future.
+              </p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <div class="feature-content">
+              <h3>Sustainable Practices</h3>
+              <p>
+                Committed to environmental responsibility through our tree
+                planting initiative.
+              </p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-headset"></i>
+            </div>
+            <div class="feature-content">
+              <h3>24/7 Customer Support</h3>
+              <p>
+                Round-the-clock assistance to address your concerns and queries
+                anytime.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="policies" class="policies-section">
+        <div class="container">
+          <h2>Our Insurance Policies</h2>
+          <div class="policies-grid">
+            <div class="policy-card">
+              <div class="policy-icon">
+                <i class="fas fa-heart"></i>
+              </div>
+              <div class="policy-content">
+                <h3 class="policy-title">Health Insurance</h3>
+                <p class="policy-description">
+                  Comprehensive health coverage for individuals and families.
+                </p>
+                <div class="policy-cta">
+                  <button
+                    class="quote-btn"
+                    data-insurance="health"
+                    onclick="showLeadPopup('health')"
+                  >
+                    Get Quote
+                  </button>
+                  <span class="policy-price">From $299/month</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="policy-card">
+              <div class="policy-icon">
+                <i class="fas fa-home"></i>
+              </div>
+              <div class="policy-content">
+                <h3 class="policy-title">Life Insurance</h3>
+                <p class="policy-description">
+                  Secure your family's future with our comprehensive life
+                  insurance plans tailored to your needs.
+                </p>
+                <a href="#contact" class="policy-link">
+                  Learn More
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="policy-card">
+              <div class="policy-icon">
+                <i class="fas fa-car"></i>
+              </div>
+              <div class="policy-content">
+                <h3 class="policy-title">Vehicle Insurance</h3>
+                <p class="policy-description">
+                  Complete coverage for all types of vehicles, keeping you
+                  protected on every journey.
+                </p>
+                <a href="#contact" class="policy-link">
+                  Learn More
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="plant-tree" class="tree-section">
+        <div class="container">
+          <div class="tree-content">
+            <h2>Plant a Tree Initiative</h2>
+            <p class="section-description">
+              Join us in making the world greener. For every donation, we plant
+              a tree in partnership with environmental organizations.
+            </p>
+
+            <div class="trees-counter">
+              <div class="counter-number" id="trees-planted">0</div>
+              <div class="counter-text">Trees Planted</div>
+            </div>
+
+            <div class="donation-options">
+              <button class="donation-btn" data-amount="5">
+                <span>Plant 1 Tree</span>
+                <span class="amount">$5</span>
+              </button>
+              <button class="donation-btn" data-amount="12">
+                <span>Plant 3 Trees</span>
+                <span class="amount">$12</span>
+              </button>
+              <button class="donation-btn" data-amount="20">
+                <span>Plant 5 Trees</span>
+                <span class="amount">$20</span>
+              </button>
+              <button class="donation-btn custom" data-amount="custom">
+                <span>Custom Amount</span>
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+
+            <div id="payment-form" class="payment-form hidden">
+              <div class="card-element"></div>
+              <button type="submit" class="donate-submit-btn">
+                <span>I Want to Donate</span>
+                <i class="fas fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact-section">
+        <div class="container">
+          <div class="contact-grid">
+            <div class="contact-info">
+              <h3>Let's Talk</h3>
+              <p>
+                Get expert insurance advice and find the perfect coverage for
+                your needs.
+              </p>
+              <div class="contact-benefits">
+                <div class="benefit-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Free Consultation</span>
+                </div>
+                <div class="benefit-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Best Rates Guaranteed</span>
+                </div>
+                <div class="benefit-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>24/7 Support</span>
+                </div>
+              </div>
+              <div class="contact-details">
+                <p><i class="fas fa-phone"></i> <span>(555) 123-4567</span></p>
+                <p>
+                  <i class="fas fa-envelope"></i>
+                  <span>info@vitalcare.com</span>
+                </p>
+                <p>
+                  <i class="fas fa-location-dot"></i>
+                  <span>123 Insurance Street, Financial District</span>
+                </p>
+                <p>
+                  <i class="fas fa-clock"></i>
+                  <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+                </p>
+              </div>
+            </div>
+            <form id="contactForm" class="contact-form">
+              <div class="form-header">
+                <h4>Request a Callback</h4>
+                <p>
+                  Fill out the form and we'll call you back within 24 hours.
+                </p>
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  placeholder="Your Name"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="Your Email"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  placeholder="Your Phone"
+                />
+              </div>
+              <div class="form-group">
+                <select id="service" name="service" required>
+                  <option value="">Select Insurance Type</option>
+                  <option value="health">Health Insurance</option>
+                  <option value="life">Life Insurance</option>
+                  <option value="vehicle">Vehicle Insurance</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <select id="contactTime" name="contactTime" required>
+                  <option value="">Best Time to Call</option>
+                  <option value="morning">Morning (9AM - 12PM)</option>
+                  <option value="afternoon">Afternoon (12PM - 4PM)</option>
+                  <option value="evening">Evening (4PM - 6PM)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Tell us about your insurance needs (Optional)"
+                ></textarea>
+              </div>
+              <button type="submit" class="cta-button">Request Callback</button>
+              <p class="form-disclaimer">
+                By submitting this form, you agree to our privacy policy and
+                consent to being contacted about insurance services.
+              </p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="newsletter-section">
+        <div class="container">
+          <div class="newsletter-content">
+            <h3>Stay Updated with Insurance Tips</h3>
+            <p>
+              Get weekly insights on insurance, financial planning, and
+              exclusive offers.
+            </p>
+            <form class="newsletter-form" id="newsletterForm">
+              <div class="form-group">
+                <input type="email" placeholder="Enter your email" required />
+                <button type="submit">Subscribe</button>
+              </div>
+              <label class="checkbox-label">
+                <input type="checkbox" required />
+                <span>I agree to receive insurance updates and offers</span>
+              </label>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <div class="calculator-widget">
+        <div class="widget-header">
+          <div class="widget-title">
+            <i class="fas fa-calculator"></i>
+            <h4>Insurance Calculator</h4>
+          </div>
+          <button class="minimize-widget">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+        <div class="widget-content">
+          <form id="calculatorForm" class="calculator-form">
+            <div class="form-group">
+              <label>Insurance Type</label>
+              <select required>
+                <option value="">Select Type</option>
+                <option value="health">Health Insurance</option>
+                <option value="life">Life Insurance</option>
+                <option value="vehicle">Vehicle Insurance</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Age</label>
+              <input
+                type="number"
+                min="18"
+                max="100"
+                required
+                placeholder="Enter your age"
+              />
+            </div>
+            <div class="form-group">
+              <label>Coverage Amount</label>
+              <input
+                type="range"
+                min="100000"
+                max="1000000"
+                step="50000"
+                value="500000"
+              />
+              <span class="range-value">$500,000</span>
+            </div>
+            <button type="submit" class="calculate-btn">
+              Calculate Premium
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="chat-widget" onclick="showLeadPopup('chat')">
+        <div class="chat-bubble">
+          <i class="fas fa-comment-dots"></i>
+          <span>Chat with an Expert</span>
+        </div>
+        <div class="chat-notification">1</div>
+      </div>
+
+      <section class="comparison-section">
+        <div class="container">
+          <h3>Compare Insurance Plans</h3>
+          <div class="comparison-tool">
+            <div class="comparison-filters">
+              <select class="plan-type">
+                <option value="">Select Plan Type</option>
+                <option value="health">Health Insurance</option>
+                <option value="life">Life Insurance</option>
+                <option value="vehicle">Vehicle Insurance</option>
+              </select>
+              <button class="compare-btn" onclick="showLeadPopup('comparison')">
+                Compare Plans
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <h3>Vital Care</h3>
+          <p>YOUR TRUSTEE</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#policies">Insurance Policies</a></li>
+            <li><a href="#plant-tree">Plant a Tree</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-social">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Vital Care. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

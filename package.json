@@ -1,0 +1,18 @@
+{
+  "name": "vital-care-website",
+  "version": "1.0.0",
+  "description": "Website for Vital Care Financial Advisory Services",
+  "main": "js/main.js",
+  "scripts": {
+    "start": "live-server",
+    "setup": "npm install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@stripe/stripe-js": "^1.54.0",
+    "live-server": "^1.2.2"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.8"
+  }
+}
