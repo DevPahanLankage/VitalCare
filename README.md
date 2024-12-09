@@ -6,6 +6,12 @@ A modern, responsive insurance website showcasing various insurance policies, fe
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 
+## 🌟 Live Demo
+
+Visit the live website: [Vital Care Insurance](https://devpahanlankage.github.io/VitalCare/)
+
+[![Website Preview](https://img.shields.io/badge/Preview-Live%20Demo-brightgreen)](https://devpahanlankage.github.io/VitalCare/)
+
 ## 🌟 Features
 
 ### Core Features
@@ -43,7 +49,12 @@ A modern, responsive insurance website showcasing various insurance policies, fe
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### Live Demo
+You can access the live version of the website at [https://devpahanlankage.github.io/VitalCare/](https://devpahanlankage.github.io/VitalCare/)
+
+### Local Development
+
+#### Prerequisites
 
 - Node.js (v14 or higher)
 - npm (v6 or higher)
@@ -158,12 +169,20 @@ STRIPE_PUBLIC_KEY=your_stripe_public_key
 
 ## 🚀 Deployment
 
-The website can be deployed to any static hosting service:
+The website is currently deployed using GitHub Pages and can be accessed at [https://devpahanlankage.github.io/VitalCare/](https://devpahanlankage.github.io/VitalCare/)
 
-- GitHub Pages
+You can also deploy it to other static hosting services:
 - Netlify
 - Vercel
 - AWS S3
+
+### GitHub Pages Deployment
+The site is automatically deployed to GitHub Pages when changes are pushed to the `main` branch. To deploy your own version:
+
+1. Fork this repository
+2. Go to repository Settings > Pages
+3. Set source branch to `main`
+4. Your site will be available at `https://[your-username].github.io/VitalCare/`
 
 ## 📝 Contributing
 

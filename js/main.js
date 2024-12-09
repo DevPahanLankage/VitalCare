@@ -232,228 +232,6 @@ if (chatWidget) {
   }, 30000);
 }
 
-// Calculator Widget Functionality
-const calculatorWidget = document.querySelector(".calculator-widget");
-const minimizeBtn = document.querySelector(".minimize-widget");
-
-if (calculatorWidget && minimizeBtn) {
-  // Minimize/Maximize functionality
-  minimizeBtn.addEventListener("click", () => {
-    calculatorWidget.classList.toggle("minimized");
-
-    // Store state in localStorage
-    const isMinimized = calculatorWidget.classList.contains("minimized");
-    localStorage.setItem("calculatorWidgetMinimized", isMinimized);
-  });
-
-  // Restore previous state
-  const wasMinimized =
-    localStorage.getItem("calculatorWidgetMinimized") === "true";
-  if (wasMinimized) {
-    calculatorWidget.classList.add("minimized");
-  }
-
-  // Make widget draggable
-  let isDragging = false;
-  let currentX;
-  let currentY;
-  let initialX;
-  let initialY;
-  let xOffset = 0;
-  let yOffset = 0;
-
-  const dragStart = (e) => {
-    if (e.target.closest(".minimize-widget")) return;
-
-    initialX =
-      e.type === "mousedown"
-        ? e.clientX - xOffset
-        : e.touches[0].clientX - xOffset;
-    initialY =
-      e.type === "mousedown"
-        ? e.clientY - yOffset
-        : e.touches[0].clientY - yOffset;
-
-    if (e.target.closest(".widget-header")) {
-      isDragging = true;
-    }
-  };
-
-  const dragEnd = () => {
-    initialX = currentX;
-    initialY = currentY;
-    isDragging = false;
-  };
-
-  const drag = (e) => {
-    if (isDragging) {
-      e.preventDefault();
-
-      currentX =
-        e.type === "mousemove"
-          ? e.clientX - initialX
-          : e.touches[0].clientX - initialX;
-      currentY =
-        e.type === "mousemove"
-          ? e.clientY - initialY
-          : e.touches[0].clientY - initialY;
-
-      xOffset = currentX;
-      yOffset = currentY;
-
-      setTranslate(currentX, currentY, calculatorWidget);
-    }
-  };
-
-  const setTranslate = (xPos, yPos, el) => {
-    el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
-  };
-
-  calculatorWidget.addEventListener("mousedown", dragStart);
-  calculatorWidget.addEventListener("touchstart", dragStart);
-  document.addEventListener("mousemove", drag);
-  document.addEventListener("touchmove", drag);
-  document.addEventListener("mouseup", dragEnd);
-  document.addEventListener("touchend", dragEnd);
-}
-
-// Calculator Form Functionality
-const calculatorForm = document.getElementById("calculatorForm");
-if (calculatorForm) {
-  const rangeInput = calculatorForm.querySelector('input[type="range"]');
-  const rangeValue = calculatorForm.querySelector(".range-value");
-
-  if (rangeInput && rangeValue) {
-    rangeInput.addEventListener("input", (e) => {
-      const value = parseInt(e.target.value).toLocaleString("en-US", {
-        style: "currency",
-        currency: "USD",
-      });
-      rangeValue.textContent = value;
-    });
-  }
-
-  calculatorForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    // Get form values
-    const insuranceType = calculatorForm.querySelector("select").value;
-    const age = parseInt(
-      calculatorForm.querySelector('input[type="number"]').value
-    );
-    const coverage = parseInt(
-      calculatorForm.querySelector('input[type="range"]').value
-    );
-
-    // Calculate premium (example calculation)
-    let basePremium;
-    switch (insuranceType) {
-      case "health":
-        basePremium = coverage * 0.004 + age * 10;
-        break;
-      case "life":
-        basePremium = coverage * 0.002 + age * 5;
-        break;
-      case "vehicle":
-        basePremium = coverage * 0.003;
-        break;
-      default:
-        basePremium = 0;
-    }
-
-    // Format the monthly premium
-    const monthlyPremium = (basePremium / 12).toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    });
-
-    // Update the button text with the calculated premium
-    const calculateBtn = calculatorForm.querySelector(".calculate-btn");
-    calculateBtn.innerHTML = `Estimated Premium: ${monthlyPremium}/month`;
-
-    // Add a class to show it's calculated
-    calculateBtn.classList.add("premium-calculated");
-
-    // Show notification
-    showNotification(
-      `Your estimated premium is ${monthlyPremium}/month`,
-      "success"
-    );
-  });
-}
-
-// Newsletter Subscription
-const newsletterForm = document.getElementById("newsletterForm");
-if (newsletterForm) {
-  newsletterForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = newsletterForm.querySelector('input[type="email"]').value;
-
-    try {
-      // Store newsletter subscription
-      await storeNewsletterSubscription(email);
-
-      // Show success message
-      showNotification("Thank you for subscribing!", "success");
-
-      // Track subscription
-      if (typeof gtag !== "undefined") {
-        gtag("event", "newsletter_subscription", {
-          event_category: "Lead Generation",
-        });
-      }
-    } catch (error) {
-      showNotification("Subscription failed. Please try again.", "error");
-    }
-  });
-}
-
-// Exit Intent Detection
-let exitIntentShown = false;
-document.addEventListener("mouseleave", (e) => {
-  if (e.clientY <= 0 && !exitIntentShown) {
-    exitIntentShown = true;
-    showLeadPopup("exit_intent");
-  }
-});
-
-// Utility Functions
-function showNotification(message, type = "success") {
-  const notification = document.createElement("div");
-  notification.className = `notification ${type}`;
-  notification.textContent = message;
-
-  document.body.appendChild(notification);
-
-  setTimeout(() => {
-    notification.classList.add("show");
-  }, 100);
-
-  setTimeout(() => {
-    notification.classList.remove("show");
-    setTimeout(() => {
-      notification.remove();
-    }, 300);
-  }, 3000);
-}
-
-async function storeNewsletterSubscription(email) {
-  // Implementation depends on your backend
-  // This is a placeholder
-  return new Promise((resolve, reject) => {
-    // Simulate API call
-    setTimeout(() => {
-      if (email) {
-        resolve();
-      } else {
-        reject(new Error("Invalid email"));
-      }
-    }, 1000);
-  });
-}
-
 // Add keyframe animation for bounce
 const style = document.createElement("style");
 style.textContent = `
@@ -493,3 +271,56 @@ style.textContent = `
 `;
 
 document.head.appendChild(style);
+
+// Newsletter Subscription
+async function storeNewsletterSubscription(email) {
+  // Implementation depends on your backend
+  // This is a placeholder
+  return new Promise((resolve, reject) => {
+    // Simulate API call
+    setTimeout(() => {
+      if (email) {
+        resolve();
+      } else {
+        reject(new Error("Invalid email"));
+      }
+    }, 1000);
+  });
+}
+
+// Tree Counter Animation
+function animateTreeCounter() {
+  const counter = document.getElementById("policy-trees-count");
+  const target = parseInt(counter.innerText.replace(",", ""));
+  let current = 0;
+  const increment = target / 100;
+  const duration = 2000; // 2 seconds
+  const interval = duration / 100;
+
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      counter.innerText = target.toLocaleString();
+      clearInterval(timer);
+    } else {
+      counter.innerText = Math.floor(current).toLocaleString();
+    }
+  }, interval);
+}
+
+// Initialize counter animation when element is in view
+document.addEventListener("DOMContentLoaded", () => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        animateTreeCounter();
+        observer.unobserve(entry.target);
+      }
+    });
+  });
+
+  const counter = document.getElementById("policy-trees-count");
+  if (counter) {
+    observer.observe(counter);
+  }
+});
