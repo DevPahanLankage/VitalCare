@@ -299,6 +299,55 @@ h6 {
 }
 
 /* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #00509e, #003366);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+      45deg,
+      transparent 48%,
+      rgba(0, 161, 228, 0.1) 50%,
+      transparent 52%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 48%,
+      rgba(0, 161, 228, 0.1) 50%,
+      transparent 52%
+    );
+  background-size: 60px 60px;
+  animation: gradientMove 20s linear infinite;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at 0% 0%,
+      rgba(179, 212, 252, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(0, 161, 228, 0.1) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
 .hero-section {
   min-height: 100vh;
   position: relative;
@@ -2002,12 +2051,8 @@ h6 {
 
 /* About Section */
 .about-section {
-  padding: 6rem 0;
-  background: linear-gradient(
-    135deg,
-    var(--background) 0%,
-    var(--background-alt) 100%
-  );
+  padding: 8rem 0;
+  background: linear-gradient(135deg, #ffffff, #e0e0e0);
   position: relative;
   overflow: hidden;
 }
@@ -2019,24 +2064,49 @@ h6 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(
-      circle at 20% 20%,
-      rgba(0, 161, 228, 0.05) 0%,
+  background: linear-gradient(
+      45deg,
+      transparent 48%,
+      rgba(0, 81, 158, 0.05) 50%,
+      transparent 52%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 48%,
+      rgba(0, 81, 158, 0.05) 50%,
+      transparent 52%
+    );
+  background-size: 40px 40px;
+  animation: gradientMove 15s linear infinite;
+}
+
+.about-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at 100% 0%,
+      rgba(0, 161, 228, 0.1) 0%,
       transparent 50%
     ),
     radial-gradient(
-      circle at 80% 80%,
-      rgba(179, 212, 252, 0.05) 0%,
+      circle at 0% 100%,
+      rgba(0, 81, 158, 0.05) 0%,
       transparent 50%
     );
+  pointer-events: none;
 }
 
 .about-section h2 {
   font-size: 2.5rem;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   color: var(--text-primary);
   position: relative;
+  animation: fadeInUp 1s ease-out;
 }
 
 .about-section h2::after {
@@ -2053,6 +2123,7 @@ h6 {
     var(--accent-color)
   );
   border-radius: 3px;
+  animation: widthGrow 1s ease-out forwards;
 }
 
 .about-text {
@@ -2063,6 +2134,7 @@ h6 {
   line-height: 1.8;
   color: var(--text-secondary);
   padding: 0 2rem;
+  animation: fadeInUp 1s ease-out 0.2s backwards;
 }
 
 .about-features {
@@ -2075,34 +2147,29 @@ h6 {
 }
 
 .feature-item {
-  background: white;
-  padding: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2.5rem;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  z-index: 1;
+  animation: fadeInUp 1s ease-out;
+  animation-fill-mode: backwards;
 }
 
-.feature-item::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    135deg,
-    var(--primary-color),
-    var(--accent-color)
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
+.feature-item:nth-child(1) {
+  animation-delay: 0.3s;
+}
+.feature-item:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.feature-item:nth-child(3) {
+  animation-delay: 0.5s;
+}
+.feature-item:nth-child(4) {
+  animation-delay: 0.6s;
 }
 
 .feature-item:hover {
@@ -2113,15 +2180,12 @@ h6 {
 .feature-icon {
   width: 60px;
   height: 60px;
-  background: linear-gradient(
-    135deg,
-    var(--primary-color),
-    var(--accent-color)
-  );
+  background: linear-gradient(135deg, #00509e, #00a1e4);
   border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 1.5rem;
   position: relative;
   z-index: 2;
   transition: all 0.3s ease;
@@ -2153,6 +2217,26 @@ h6 {
   margin: 0;
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes widthGrow {
+  from {
+    width: 0;
+  }
+  to {
+    width: 80px;
+  }
+}
+
 /* Newsletter Section */
 .newsletter-section {
   background: linear-gradient(135deg, #00509e, #003366);
@@ -2169,28 +2253,48 @@ h6 {
   left: 0;
   width: 100%;
   height: 100%;
+  background: linear-gradient(
+      45deg,
+      transparent 48%,
+      rgba(0, 161, 228, 0.1) 50%,
+      transparent 52%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 48%,
+      rgba(0, 161, 228, 0.1) 50%,
+      transparent 52%
+    );
+  background-size: 60px 60px;
+  animation: gradientMove 20s linear infinite;
+}
+
+.newsletter-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: radial-gradient(
-      circle at 20% 20%,
-      rgba(0, 161, 228, 0.1) 0%,
-      transparent 25%
+      circle at 0% 0%,
+      rgba(179, 212, 252, 0.15) 0%,
+      transparent 50%
     ),
     radial-gradient(
-      circle at 80% 80%,
-      rgba(179, 212, 252, 0.05) 0%,
-      transparent 25%
+      circle at 100% 100%,
+      rgba(0, 161, 228, 0.1) 0%,
+      transparent 50%
     );
-  animation: gradientMove 15s ease-in-out infinite;
+  pointer-events: none;
 }
 
 @keyframes gradientMove {
   0% {
-    background-position: 0% 0%;
-  }
-  50% {
-    background-position: 100% 100%;
+    background-position: 0 0;
   }
   100% {
-    background-position: 0% 0%;
+    background-position: 60px 60px;
   }
 }
 
@@ -2207,10 +2311,11 @@ h6 {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, #ffffff, #b3d4fc);
+  background: linear-gradient(135deg, #ffffff 30%, #b3d4fc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: titleFloat 3s ease-in-out infinite;
+  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes titleFloat {
@@ -2235,10 +2340,36 @@ h6 {
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 3rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
   max-width: 600px;
   margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter-form::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%
+  );
+  animation: formGlow 10s linear infinite;
+}
+
+@keyframes formGlow {
+  0% {
+    transform: translate(-30%, -30%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-30%, -30%) rotate(360deg);
+  }
 }
 
 .newsletter-form .form-group {
@@ -2386,16 +2517,40 @@ h6 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(
-      circle at 20% 20%,
-      rgba(255, 255, 255, 0.025) 0%,
+  background: linear-gradient(
+      45deg,
+      transparent 48%,
+      rgba(0, 161, 228, 0.1) 50%,
+      transparent 52%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 48%,
+      rgba(0, 161, 228, 0.1) 50%,
+      transparent 52%
+    );
+  background-size: 30px 30px;
+  animation: gradientMove 25s linear infinite;
+}
+
+.footer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at 0% 0%,
+      rgba(179, 212, 252, 0.1) 0%,
       transparent 40%
     ),
     radial-gradient(
-      circle at 80% 80%,
-      rgba(255, 255, 255, 0.025) 0%,
+      circle at 100% 100%,
+      rgba(0, 161, 228, 0.05) 0%,
       transparent 40%
     );
+  pointer-events: none;
 }
 
 .footer-content {
